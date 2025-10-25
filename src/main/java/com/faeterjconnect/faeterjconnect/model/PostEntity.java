@@ -1,5 +1,6 @@
 package com.faeterjconnect.faeterjconnect.model;
 
+import com.faeterjconnect.faeterjconnect.model.enums.RolePostEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -29,6 +30,9 @@ public class PostEntity {
     private UserEntity user;
 
     private String content;
+
+    @Enumerated(EnumType.STRING)
+    private RolePostEnum rolePostEnum;
 
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")

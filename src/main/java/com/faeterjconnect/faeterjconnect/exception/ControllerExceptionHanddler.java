@@ -3,6 +3,7 @@ package com.faeterjconnect.faeterjconnect.exception;
 import com.faeterjconnect.faeterjconnect.dto.ExceptionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,21 +16,57 @@ import java.util.stream.Collectors;
 public class ControllerExceptionHanddler extends ExceptionCustom {
 
 
-//    @ExceptionHandler(BadCredentialsException.class)
-//    public ResponseEntity incorrectCredentials(BadCredentialsException exception) {
-//        ExceptionDTO exceptionDTO = new ExceptionDTO("Email or Password incorrect", "401");
-//        return new ResponseEntity(exceptionDTO, HttpStatus.UNAUTHORIZED);
-//    }
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity incorrectCredentials(BadCredentialsException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Email ou Senha Incorretos.");
+        return new ResponseEntity(exceptionDTO, HttpStatus.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity handleEmailAlreadyExists(EmailAlreadyExistsException exception) {
-        ExceptionDTO exceptionDTO = new ExceptionDTO("Email already exists", "400");
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Email ja existe.");
         return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(AdminAlreadyExistsException.class)
     public ResponseEntity handleAdminAlreadyExists(AdminAlreadyExistsException exception) {
-        ExceptionDTO exceptionDTO = new ExceptionDTO("Admin already exists", "400");
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Admin ja existe.");
+        return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidRoleException.class)
+    public ResponseEntity InvalidRoleException(InvalidRoleException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Role inválido.");
+        return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidUserException.class)
+    public ResponseEntity InvalidUserException(InvalidUserException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Autor inválido.");
+        return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PostNotExistsException.class)
+    public ResponseEntity PostNotExistsException(PostNotExistsException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Post não existe.");
+        return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PostNotYoursException.class)
+    public ResponseEntity PostNotYoursException(PostNotYoursException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Post não e seu.");
+        return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CommentNotYoursException.class)
+    public ResponseEntity CommentNotYoursException(CommentNotYoursException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Comentario não e seu.");
+        return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CommentNotExistsException.class)
+    public ResponseEntity CommentNotExistsException(CommentNotExistsException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Comentario não existe.");
         return new ResponseEntity(exceptionDTO, HttpStatus.BAD_REQUEST);
     }
 
@@ -39,17 +76,17 @@ public class ControllerExceptionHanddler extends ExceptionCustom {
 //        return new ResponseEntity(exceptionDTO, HttpStatus.NOT_FOUND);
 //    }
 //
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<ExceptionDTO> handleValidationErrors(MethodArgumentNotValidException exception) {
-//        List<String> errors = exception.getBindingResult().getFieldErrors()
-//                .stream()
-//                .map(FieldError::getDefaultMessage)
-//                .collect(Collectors.toList());
-//
-//        String errorMessage = String.join(", ", errors);
-//        ExceptionDTO exceptionDTO = new ExceptionDTO(errorMessage, "400");
-//        return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ExceptionDTO> handleValidationErrors(MethodArgumentNotValidException exception) {
+        List<String> errors = exception.getBindingResult().getFieldErrors()
+                .stream()
+                .map(FieldError::getDefaultMessage)
+                .collect(Collectors.toList());
+
+        String errorMessage = String.join(", ", errors);
+        ExceptionDTO exceptionDTO = new ExceptionDTO(errorMessage);
+        return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
+    }
 
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity handleExceptionGeneral(Exception exception) {

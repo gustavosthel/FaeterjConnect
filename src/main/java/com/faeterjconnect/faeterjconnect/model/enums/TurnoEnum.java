@@ -1,7 +1,6 @@
 package com.faeterjconnect.faeterjconnect.model.enums;
 
-public enum Role {
-    PROFESSOR,
-    ALUNO,
-    ADMIN
+public enum TurnoEnum {
+    MANHA,
+    NOITE
 }

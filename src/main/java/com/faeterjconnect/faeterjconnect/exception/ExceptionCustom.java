@@ -12,8 +12,38 @@ public class ExceptionCustom {
         }
     }
 
-    public static class IdUserAlreadyExistsException extends RuntimeException {
-        public IdUserAlreadyExistsException() {
+    public static class BadCredentialsException extends RuntimeException {
+        public BadCredentialsException() {
+        }
+    }
+
+    public static class InvalidUserException extends RuntimeException {
+        public InvalidUserException() {
+        }
+    }
+
+    public static class InvalidRoleException extends RuntimeException {
+        public InvalidRoleException() {
+        }
+    }
+
+    public static class PostNotExistsException extends RuntimeException {
+        public PostNotExistsException() {
+        }
+    }
+
+    public static class PostNotYoursException extends RuntimeException {
+        public PostNotYoursException() {
+        }
+    }
+
+    public static class CommentNotYoursException extends RuntimeException {
+        public CommentNotYoursException() {
+        }
+    }
+
+    public static class CommentNotExistsException extends RuntimeException {
+        public CommentNotExistsException() {
         }
     }
 
