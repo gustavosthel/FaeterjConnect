@@ -102,3 +102,10 @@ O chat é implementado usando WebSocket no backend e Socket.IO no frontend, gara
 - Integração com calendário acadêmico
 - Mapa interativo do campus
 
+## 📄 Licença
+
+Projeto criado para fins de estudo e prática.
+
+## 👥  Desenvolvedores
+### 💙 Nathaly Pereira - @metataly
+### 💙 Gustavo Sthel - @gustavosthel
